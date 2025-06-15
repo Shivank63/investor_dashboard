@@ -1,4 +1,10 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/Card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/Card";
 import {
   PieChart as RechartsPieChart,
   Cell,
@@ -13,16 +19,16 @@ import {
   BarChart,
   Bar,
   Pie,
-} from "recharts"
-import { formatCurrency } from "../utills/helpers"
-import { COLORS } from "../mockData/mockData"
+} from "recharts";
+import { formatCurrency } from "../utills/helpers";
+import { COLORS } from "../mockData/mockData";
 
 const Charts = ({ investorData, performanceData }) => {
   const allocationData = investorData.map((investor) => ({
     name: investor.name,
     value: investor.allocation,
     amount: investor.invested,
-  }))
+  }));
 
   return (
     <div className="space-y-6">
@@ -32,7 +38,9 @@ const Charts = ({ investorData, performanceData }) => {
         <Card>
           <CardHeader>
             <CardTitle>Investment Allocation Distribution</CardTitle>
-            <CardDescription>Visual breakdown of capital allocation across investors</CardDescription>
+            <CardDescription>
+              Visual breakdown of capital allocation across investors
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
@@ -42,18 +50,36 @@ const Charts = ({ investorData, performanceData }) => {
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                  label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
                   outerRadius={80}
                   fill="#8884d8"
                   dataKey="value"
                 >
                   {allocationData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
                   ))}
                 </Pie>
-                <Tooltip formatter={(value, name) => [`${value}%`, "Allocation"]} />
+                <Tooltip formatter={(value) => [`${value}%`, "Allocation"]} />
               </RechartsPieChart>
             </ResponsiveContainer>
+
+            {/* Custom legend below the pie */}
+            <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-y-2 text-sm">
+              {allocationData.map((entry, index) => (
+                <div key={index} className="flex items-center space-x-2">
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                  ></div>
+                  <span className="text-muted-foreground truncate">
+                    {entry.name}: {entry.value}%
+                  </span>
+                </div>
+              ))}
+            </div>
           </CardContent>
         </Card>
 
@@ -61,15 +87,28 @@ const Charts = ({ investorData, performanceData }) => {
         <Card>
           <CardHeader>
             <CardTitle>Investment Amount Distribution</CardTitle>
-            <CardDescription>Capital distribution by investor amount</CardDescription>
+            <CardDescription>
+              Capital distribution by investor amount
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={allocationData}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" angle={-45} textAnchor="end" height={80} fontSize={12} />
+                <XAxis
+                  dataKey="name"
+                  angle={-45}
+                  textAnchor="end"
+                  height={80}
+                  fontSize={12}
+                />
                 <YAxis />
-                <Tooltip formatter={(value) => [formatCurrency(Number(value)), "Investment"]} />
+                <Tooltip
+                  formatter={(value) => [
+                    formatCurrency(Number(value)),
+                    "Investment",
+                  ]}
+                />
                 <Bar dataKey="amount" fill="#8884d8" />
               </BarChart>
             </ResponsiveContainer>
@@ -81,7 +120,9 @@ const Charts = ({ investorData, performanceData }) => {
       <Card>
         <CardHeader>
           <CardTitle>Performance Over Time</CardTitle>
-          <CardDescription>Monthly profit/loss trends and performance metrics</CardDescription>
+          <CardDescription>
+            Monthly profit/loss trends and performance metrics
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={400}>
@@ -89,17 +130,37 @@ const Charts = ({ investorData, performanceData }) => {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" />
               <YAxis />
-              <Tooltip formatter={(value) => [formatCurrency(Number(value)), ""]} />
+              <Tooltip
+                formatter={(value) => [formatCurrency(Number(value)), ""]}
+              />
               <Legend />
-              <Line type="monotone" dataKey="profit" stroke="#10b981" strokeWidth={3} name="Profit" />
-              <Line type="monotone" dataKey="loss" stroke="#ef4444" strokeWidth={3} name="Loss" />
-              <Line type="monotone" dataKey="net" stroke="#3b82f6" strokeWidth={3} name="Net P&L" />
+              <Line
+                type="monotone"
+                dataKey="profit"
+                stroke="#10b981"
+                strokeWidth={3}
+                name="Profit"
+              />
+              <Line
+                type="monotone"
+                dataKey="loss"
+                stroke="#ef4444"
+                strokeWidth={3}
+                name="Loss"
+              />
+              <Line
+                type="monotone"
+                dataKey="net"
+                stroke="#3b82f6"
+                strokeWidth={3}
+                name="Net P&L"
+              />
             </LineChart>
           </ResponsiveContainer>
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default Charts
+export default Charts;

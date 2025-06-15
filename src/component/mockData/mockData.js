@@ -1,0 +1,73 @@
+export const investorData = [
+  {
+    id: 1,
+    name: "Rahul Sharma",
+    invested: 100000,
+    allocation: 20,
+    profitLoss: 12000,
+    status: "active",
+    joinDate: "2024-01-15",
+    email: "rahul@email.com",
+  },
+  {
+    id: 2,
+    name: "Pooja Mehta",
+    invested: 150000,
+    allocation: 30,
+    profitLoss: -8000,
+    status: "active",
+    joinDate: "2024-02-10",
+    email: "pooja@email.com",
+  },
+  {
+    id: 3,
+    name: "Amit Kumar",
+    invested: 75000,
+    allocation: 15,
+    profitLoss: 5500,
+    status: "active",
+    joinDate: "2024-01-20",
+    email: "amit@email.com",
+  },
+  {
+    id: 4,
+    name: "Sneha Patel",
+    invested: 200000,
+    allocation: 40,
+    profitLoss: 18000,
+    status: "active",
+    joinDate: "2023-12-05",
+    email: "sneha@email.com",
+  },
+  {
+    id: 5,
+    name: "Vikram Singh",
+    invested: 50000,
+    allocation: 10,
+    profitLoss: -2500,
+    status: "inactive",
+    joinDate: "2024-03-01",
+    email: "vikram@email.com",
+  },
+  {
+    id: 6,
+    name: "Priya Gupta",
+    invested: 125000,
+    allocation: 25,
+    profitLoss: 9800,
+    status: "active",
+    joinDate: "2024-01-30",
+    email: "priya@email.com",
+  },
+]
+
+export const performanceData = [
+  { month: "Jan", profit: 15000, loss: -5000, net: 10000 },
+  { month: "Feb", profit: 22000, loss: -8000, net: 14000 },
+  { month: "Mar", profit: 18000, loss: -12000, net: 6000 },
+  { month: "Apr", profit: 28000, loss: -6000, net: 22000 },
+  { month: "May", profit: 25000, loss: -9000, net: 16000 },
+  { month: "Jun", profit: 32000, loss: -7000, net: 25000 },
+]
+
+export const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8", "#82CA9D"]
